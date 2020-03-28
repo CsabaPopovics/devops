@@ -6,6 +6,7 @@ public class Shovel extends Item {
 	public boolean use(String cmd) {
 		if(cmd == "Clear") {
 			this.getOwner().getField().updateSnow(-1);
+			return true;
 		}
 		return false;
 	}

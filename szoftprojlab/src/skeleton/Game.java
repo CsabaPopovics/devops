@@ -1,14 +1,18 @@
 package skeleton;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import characters.Pawn;
 import fields.*;
 import items.*;
 
 public class Game {
-	private ArrayList<Pawn> characters;
+	private static ArrayList<Pawn> characters;
 	private ArrayList<Field> fields;
+	
+	private static boolean gameOver = false;
+	private static boolean win = false;
 	
 	private static Ammo collectedAmmo = null;
 	private static Pistol collectedPistol = null;
@@ -26,8 +30,33 @@ public class Game {
 		collectedFlare = flare;
 	}
 	
-	public int getPlayerCount() {
+	public static int getPlayerCount() {
 		return characters.size();
+	}
+	
+	public void blizzard() {
+		Random extraSnow = new Random();
+		for(Field f : fields){
+			if(Math.random()>0.55)
+				f.updateSnow(extraSnow.nextInt(5)+1);
+		}
+	}
+	
+	public void start() {
+		while(!gameOver && !win) {
+			blizzard();
+			for(Pawn p: characters) {
+				p.command();
+			}
+		}
+	}
+	
+	public static void end() {
+		gameOver = true;
+	}
+	
+	public static void win() {
+		win = true;
 	}
 	
 

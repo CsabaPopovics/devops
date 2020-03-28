@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import enums.Direction;
+import items.Item;
 import characters.*;
 
-public class Field {
+public abstract class Field {
 	private ArrayList<Pawn> characters;
 	private Map<Direction, Field> neighbours;
 	
 	private int snowLevel;
-	private int limit = 100;
 	
 	public void accept(Pawn p) {
 		characters.add(p);
@@ -19,6 +19,10 @@ public class Field {
 	
 	public void remove(Pawn p) {
 		characters.remove(p);
+	}
+	
+	public Item getItem() {
+		return null;
 	}
 	
 	public Field getNeighbour(Direction d) {
@@ -38,10 +42,12 @@ public class Field {
 	}
 	
 	public int getLimit() {
-		return limit;
+		return 100;
 	}
 	
 	public ArrayList<Pawn> getCharacters(){
 		return characters;
 	}
+
+	public abstract void removeItem();
 }
