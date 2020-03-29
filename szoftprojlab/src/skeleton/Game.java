@@ -9,7 +9,7 @@ import items.*;
 
 public class Game {
 	private static ArrayList<Pawn> characters;
-	private ArrayList<Field> fields;
+	private static ArrayList<Field> fields;
 	
 	private static boolean gameOver = false;
 	private static boolean win = false;
@@ -42,14 +42,14 @@ public class Game {
 		}
 	}
 	
-	public void start() {
+	/*public void start() {
 		while(!gameOver && !win) {
 			blizzard();
 			for(Pawn p: characters) {
 				p.command();
 			}
 		}
-	}
+	}*/
 	
 	public static void end() {
 		gameOver = true;
@@ -57,6 +57,14 @@ public class Game {
 	
 	public static void win() {
 		win = true;
+	}
+
+	public static void checkConditions() {
+		if(collectedAmmo != null && collectedPistol != null && collectedFlare != null) {
+			if(characters.get(0).getField().getCharacters().size()==fields.size())
+				win();
+		}
+		
 	}
 	
 

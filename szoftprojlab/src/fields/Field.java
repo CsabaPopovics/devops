@@ -8,10 +8,10 @@ import items.Item;
 import characters.*;
 
 public abstract class Field {
-	private ArrayList<Pawn> characters;
-	private Map<Direction, Field> neighbours;
+	protected ArrayList<Pawn> characters;
+	protected Map<Direction, Field> neighbours;
 	
-	private int snowLevel;
+	protected int snowLevel;
 	
 	public void accept(Pawn p) {
 		characters.add(p);
@@ -21,9 +21,7 @@ public abstract class Field {
 		characters.remove(p);
 	}
 	
-	public Item getItem() {
-		return null;
-	}
+	public abstract Item getItem();
 	
 	public Field getNeighbour(Direction d) {
 		return neighbours.get(d);
@@ -32,6 +30,7 @@ public abstract class Field {
 	public int getSnowLevel() {
 		return snowLevel;
 	}
+	
 	
 	public void updateSnow(int i) {
 		snowLevel += i;
