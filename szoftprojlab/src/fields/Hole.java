@@ -13,7 +13,7 @@ public class Hole extends Field {
 	@Override
 	public void updateSnow(int i) {
 		super.updateSnow(i);
-		if(i < 0) {
+		if(i > 0) {
 			for(Pawn p : characters)
 				p.updateBodyTemp(-1);
 		}
@@ -31,4 +31,9 @@ public class Hole extends Field {
 	
 	@Override
 	public int getLimit() {return 0;}
+
+	@Override
+	public boolean setIgloo() {
+		return false;
+	}
 }

@@ -12,6 +12,7 @@ public abstract class Field {
 	protected Map<Direction, Field> neighbours;
 	
 	protected int snowLevel;
+	protected String name;
 	
 	public void accept(Pawn p) {
 		characters.add(p);
@@ -49,4 +50,8 @@ public abstract class Field {
 	}
 
 	public abstract void removeItem();
+
+	public abstract boolean setIgloo();
+	
+	public String getName() {return name;}
 }

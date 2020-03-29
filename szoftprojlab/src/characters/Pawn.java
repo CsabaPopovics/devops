@@ -8,20 +8,22 @@ import skeleton.Game;
 import enums.*;
 
 public class Pawn {
-	private int bodyTemp;
-	//private int workUnit = 4;
-	//private boolean done = false;
+	protected String name;
+	protected int bodyTemp = 4;
 	
-	private Field field;
-	private ArrayList<Pawn> theOthers = field.getCharacters();
-	private ArrayList<Item> inventory = null;
+	protected Field field;
+	protected ArrayList<Pawn> theOthers = field.getCharacters();
+	protected ArrayList<Item> inventory = null;
+	
+	public Pawn(String name) {
+		this.name = name;
+	}
 	
 	public void step(Direction d) {
 		Field destination = field.getNeighbour(d);
 		if(destination != null) {
 			field.remove(this);
 			destination.accept(this);
-			workUnit--;
 		}
 	}
 	
@@ -35,21 +37,12 @@ public class Pawn {
 		if(excavatedItem != null) {
 			addToInventory(excavatedItem);
 			field.removeItem();
-			workUnit--;
 		}
 		return;
 	}
 	
 	public void addToInventory(Item i) {
 		inventory.add(i);
-	}
-	
-	public void addPart(Item i) {
-		i.use("AddPart");
-	}
-	
-	public void fire() {
-		Game.checkConditions();
 	}
 	
 	public void assembleGun() {
@@ -62,7 +55,14 @@ public class Pawn {
 			}
 		}
 		fire();
-		workUnit--;
+	}
+	
+	public void addPart(Item i) {
+		i.use("AddPart");
+	}
+	
+	public void fire() {
+		Game.checkConditions();
 	}
 	
 	public void die() {
@@ -130,42 +130,7 @@ public class Pawn {
 	public void removeItem(Item i) {
 		inventory.remove(i);
 	}
-
-	/*
-	public void command() {
-		
-		while(!done && workUnit > 0) {
-		}
-	}
 	
-	public void finish() {
-		done = true;
-	}*/
-	
-	/*public void choose(char c) {
-		switch(c) {
-		case 'W':
-		case 'w': 
-			step(Direction.Up);
-			break;
-		case 'A':
-		case 'a':
-			step(Direction.Left);
-			break;
-		case 'S':
-		case 's':
-			step(Direction.Down);
-			break;
-		case 'D':
-		case 'd':
-			step(Direction.Right);
-			break;
-		case 'E':
-		case 'e':
-			
-		}
-	}*/
-	
-	
+	public String getName() {return name;}
 
 }

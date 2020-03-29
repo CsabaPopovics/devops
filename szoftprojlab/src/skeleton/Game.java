@@ -11,9 +11,6 @@ public class Game {
 	private static ArrayList<Pawn> characters;
 	private static ArrayList<Field> fields;
 	
-	private static boolean gameOver = false;
-	private static boolean win = false;
-	
 	private static Ammo collectedAmmo = null;
 	private static Pistol collectedPistol = null;
 	private static Flare collectedFlare = null;
@@ -42,28 +39,23 @@ public class Game {
 		}
 	}
 	
-	/*public void start() {
-		while(!gameOver && !win) {
-			blizzard();
-			for(Pawn p: characters) {
-				p.command();
-			}
-		}
-	}*/
-	
 	public static void end() {
-		gameOver = true;
 	}
 	
 	public static void win() {
-		win = true;
 	}
 
 	public static void checkConditions() {
 		if(collectedAmmo != null && collectedPistol != null && collectedFlare != null) {
-			if(characters.get(0).getField().getCharacters().size()==fields.size())
+			if(characters.get(0).getField().getCharacters().size()==fields.size()) {
 				win();
+				return;
+			}
+			
 		}
+		collectedAmmo = null;
+		collectedPistol = null;
+		collectedFlare = null;
 		
 	}
 	
